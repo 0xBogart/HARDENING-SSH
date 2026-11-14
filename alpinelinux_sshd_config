@@ -1,0 +1,73 @@
+# [ Alpine Linux | v3.24.4 ]
+# [ OpenSSH_10.3p1 | OpenSSL 3.5.9 ]
+#
+# [ Autenticación clásica: ed25519 ]
+# [ KEX Híbrido Post-Quantum: ML-KEM-768/X25519 + NTRU Prime/X25519 ]
+
+# [ GENERAR ssh-key ed25519 EN CLIENTE ]
+#
+# [ SIN Passphrase ]
+# ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_1 -N '' -C "ssh-ed25519"
+#
+# [ CON Passphrase ]
+# ssh-keygen -t ed25519 -a 100 -f ~/.ssh/id_ed25519_2 -C "ssh-ed25519"
+
+# [ NETWORK ]
+AddressFamily inet
+ListenAddress 192.168.1.131
+Port 18913
+
+# [ AUTENTICACIÓN ]
+PermitRootLogin no
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+PubkeyAuthentication yes
+PermitEmptyPasswords no
+AuthenticationMethods publickey
+
+AllowUsers bogart
+
+MaxAuthTries 3
+MaxSessions 2
+LoginGraceTime 30
+
+# [ INTERCAMBIO DE CLAVES HÍBRIDO POST-QUANTUM ]
+KexAlgorithms mlkem768x25519-sha256,sntrup761x25519-sha512
+
+# [ AUTENTICACIÓN DEL SERVIDOR - ED25519 ]
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKeyAlgorithms ssh-ed25519
+
+# [ AUTENTICACIÓN DE USUARIOS - ED25519 ]
+PubkeyAcceptedAlgorithms ssh-ed25519
+
+# [ CIFRADO SIMÉTRICO ]
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
+
+# [ AUTENTICACIÓN DE MENSAJES ]
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
+
+# [ SEGURIDAD DE LA SESIÓN ]
+PermitTTY yes
+DisableForwarding yes
+PermitTunnel no
+PrintMotd no
+
+# [ LÍMITE DE CONEXIONES ]
+MaxStartups 10:30:30
+PerSourceMaxStartups 3
+PerSourcePenalties yes
+
+ClientAliveInterval 60
+ClientAliveCountMax 3
+
+# [ REKEYING ]
+RekeyLimit 1G 1h
+
+# [ LOGGING ]
+LogLevel VERBOSE
+SyslogFacility AUTH
+
+# [ SEGURIDAD ADICIONAL ]
+HostbasedAuthentication no
+IgnoreRhosts yes
