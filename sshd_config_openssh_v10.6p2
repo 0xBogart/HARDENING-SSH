@@ -1,4 +1,4 @@
-# [ Arch Linux | SSH Hardening Híbrido Post-Quantum ]
+# [ Testado en Arch Linux | SSH Hardening Híbrido Post-Quantum ]
 # [ OpenSSH_10.6p2 | OpenSSL 4.1.0 ]
 
 # [ Autenticación clásica compatible: ed25519 ]
