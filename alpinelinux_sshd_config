@@ -1,4 +1,4 @@
-# [ Alpine Linux | v3.24.4 ]
+# [ Testado en Alpine Linux | v3.24.4 ]
 # [ OpenSSH_10.3p1 | OpenSSL 3.5.9 ]
 #
 # [ Autenticación clásica: ed25519 ]
